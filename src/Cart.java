@@ -1,18 +1,19 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Cart {
 	
 	private ArrayList<Product> purchasedProducts;
 	private double total;
 	
-	
 	public Cart() {
-		//this.purchasedProducts = //FIXME: Complete this line;
-		//this.total = 0;//FIXME: complete this line;
+		this.purchasedProducts = null;//FIXME: Complete this line;
+		this.total = 0;//FIXME: complete this line;
 	}
 	
 	public void addProduct(Product p) {
 		// FIXME: complete the implementation of this method.
+		
 	}
 	
 	

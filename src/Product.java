@@ -1,5 +1,10 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
 public class Product {
 	
+	//private int productID;
 	private String productSKU;
 	private String productName;
 	private String productSize;
@@ -19,12 +24,12 @@ public class Product {
 	}
 	
 	
-	public String getName() {
-		return "TODO: Implement and document getName()";
-	}
-	
 	public String getSKU() {
 		return "TODO: Implement and document getSKU()";
+	}
+	
+	public String getName() {
+		return "TODO: Implement and document getName()";
 	}
 	
 	public String getSize() {
@@ -34,6 +39,22 @@ public class Product {
 	public double getPrice() {
 		System.out.println("TODO: Implement and document getName()");
 		return 0;
+	}
+	
+	public void setSKU(String productSKU) {
+		this.productSKU = productSKU;
+	}
+	
+	public void setName(String productName) {
+		this.productName = productName;
+	}
+	
+	public void setSize(String productSize) {
+		this.productSize = productSize;
+	}
+	
+	public void setPrice(double productPrice) {
+		this.productPrice = productPrice;
 	}
 	
 
