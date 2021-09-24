@@ -25,40 +25,21 @@ public class Product {
 	
 	
 	public String getSKU() {
-		return "TODO: Implement and document getSKU()";
+		return this.productSKU;
 	}
 	
 	public String getName() {
-		return "TODO: Implement and document getName()";
+		return this.productName;
 	}
 	
 	public String getSize() {
-		return "TODO: Implement and document getSize()";
+		return this.productSize;
 	}
 	
 	public double getPrice() {
-		System.out.println("TODO: Implement and document getName()");
-		return 0;
+		return this.productPrice;
 	}
-	
-	public void setSKU(String productSKU) {
-		this.productSKU = productSKU;
-	}
-	
-	public void setName(String productName) {
-		this.productName = productName;
-	}
-	
-	public void setSize(String productSize) {
-		this.productSize = productSize;
-	}
-	
-	public void setPrice(double productPrice) {
-		this.productPrice = productPrice;
-	}
-	
 
-	
 	/**
 	 * overrides equals() so that two Product objects are considered equal if the
 	 * strings representing their SKU numbers are equal
@@ -72,6 +53,10 @@ public class Product {
 		}
 		
 		return false;
+	}
+
+	public String toString() {
+		return productSKU + " ";
 	}
 	
 	

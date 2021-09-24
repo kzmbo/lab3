@@ -3,22 +3,36 @@ import java.util.Scanner;
 
 public class Cart {
 	
-	private ArrayList<Product> purchasedProducts;
+	private ArrayList<Amount> purchasedProducts;
 	private double total;
 	
+	
 	public Cart() {
-		this.purchasedProducts = null;//FIXME: Complete this line;
+		
+		this.purchasedProducts = new ArrayList<Amount>(); //FIXME: Complete this line;
 		this.total = 0;//FIXME: complete this line;
 	}
 	
 	public void addProduct(Product p) {
-		// FIXME: complete the implementation of this method.
+		boolean val = true;
+		for(int i=0; i<this.purchasedProducts.size(); i++) {
+			if(this.purchasedProducts.get(i).pro.getSKU().equals(p.getSKU())) {
+				val = false;
+				this.purchasedProducts.get(i).updateProAmount((this.purchasedProducts.get(i).proAmount)+1);
+			}
+		}
+		if(val) {
+			Amount am = new Amount(p, 0);
+			this.purchasedProducts.add(am);
+		}
 		
+		total += p.getPrice();
 	}
 	
 	
 	public double getTransactionTotal() {
-		// FIXME: complete the implementation of this method.
+		System.out.println("You're total is: $" + total);
+		return total;
 	}
 	
 	/**
@@ -29,7 +43,8 @@ public class Cart {
 	* @return a String 
 	*/
 	public String toString() {
-		return "FIXME: return the correct string";
+		System.out.println(purchasedProducts);
+		return "";
 	}
 
 }
