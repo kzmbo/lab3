@@ -17,17 +17,18 @@ public class Cart {
 		for(int i = 0; i < this.purchasedProducts.size(); i++) {
 			if(this.purchasedProducts.get(i).product.getSKU().equals(p.getSKU())) {
 				isNotDuplicate = false;
-				this.purchasedProducts.get(i).updateProductAmount((this.purchasedProducts.get(i).productAmount) + 1);
-				int x = (this.purchasedProducts.get(i).productAmount) + 1;
+				this.purchasedProducts.get(i).updateProductAmount((this.purchasedProducts.get(i).productAmount + 1));
+				int x = (this.purchasedProducts.get(i).productAmount);
+				System.out.println(x);
 				total += p.getPrice();
 				return x;
 			}
 		}
 		if(isNotDuplicate){
-			Amount am = new Amount(p, 0);
+			Amount am = new Amount(p, 1);
 			this.purchasedProducts.add(am);
 			total += p.getPrice();
-			return 0;
+			return 1;
 		}
 		return 0;
 		//total += p.getPrice();
@@ -35,7 +36,7 @@ public class Cart {
 	
 	
 	public double getTransactionTotal() {
-		System.out.println("You're total is: $" + total);
+		//System.out.println("You're total is: $" + total);
 		return total;
 	}
 	

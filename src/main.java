@@ -50,15 +50,14 @@ public class main {
 
 		
 		PrintWriter fileOut;
-//		try {
-//			fileOut = new PrintWriter(receiptName + ".txt");
-//		} catch(Exception e) {
-//
-//		}
-		fileOut = new PrintWriter("./src/receipt.txt");
-		
+		try {
+			fileOut = new PrintWriter(receiptName + ".txt");
+		} catch(Exception e) {
+			fileOut = new PrintWriter("./src/receipt.txt");
+		}
 		//PrintWriter reference fileOut is created.
 		// NOTE: depending on whether you're using replit or an IDE, be sure to verify that the directory is correct.
+
 
 		fileOut.println(receiptName);
 		fileOut.println("Items\t\t\t\tSubtotal");
@@ -93,7 +92,6 @@ public class main {
 							//System.out.println(currentProduct.getSKU() + " " + currentProduct.getName() +  " " + currentProduct.getSize() + " " + currentProduct.getPrice()); FOR DEBUGGING PURPOSES
 							amountDuplicateSKU = cart.addProduct(currentProduct);
 							currentAmount = new Amount(currentProduct, amountDuplicateSKU);
-							new Product("", "", "", 0);
 							foundMatchingSKU = true;
 							// if there's a matching sku, this boolean will be compared immediately in order for the program to run as intended
 							break;
@@ -106,7 +104,8 @@ public class main {
 			// if we found the matching SKU, write it to the output file (receipt.txt)
 			// if not, nothing get written to the output file. it also prints out "try again"
 			if(foundMatchingSKU){
-				productsToAdd.put(currentProduct.getSKU(), currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "\t" + currentProduct.getPrice());
+				double subtotal = Math.round( (currentProduct.getPrice() * currentAmount.getAmount()) * 100.0 ) / 100.0;
+				productsToAdd.put(currentProduct.getSKU(), currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "(@" + currentProduct.getPrice() + ")" + "\t$" +  subtotal);
 			}else {
 				System.out.println("Try Again!");
 			}
@@ -116,14 +115,12 @@ public class main {
 			inputFile.close();
 		}
 
-		for (String i : productsToAdd.values()){
-			System.out.println(i);
-			fileOut.println(i);
-		}
+		for (String i : productsToAdd.values()) { fileOut.println(i); }
 
 		// Closes the program by writing the total of all the products in the cart.
 		// closes the output file.
-		fileOut.println("Total: $" + cart.getTransactionTotal());
+		double total = Math.round( (cart.getTransactionTotal()) * 100.0 ) / 100.0;
+		fileOut.println("Total: $" + total);
 		fileOut.close();
 	}
 }

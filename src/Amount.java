@@ -11,7 +11,7 @@ public class Amount {
 	
 	public void updateProductAmount(int proAmount) {
 		this.productAmount = proAmount;
-		//System.out.println("New amount!: " + this.proAmount);
+		//System.out.println("New amount!: " + this.productAmount);
 	}
 	
 	public void updatePro(Product product) {
