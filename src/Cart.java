@@ -24,10 +24,10 @@ public class Cart {
 			}
 		}
 		if(isNotDuplicate){
-			Amount am = new Amount(p, 1);
+			Amount am = new Amount(p, 0);
 			this.purchasedProducts.add(am);
 			total += p.getPrice();
-			return 1;
+			return 0;
 		}
 		return 0;
 		//total += p.getPrice();

@@ -1,0 +1,5 @@
+a
+Items				Subtotal
+Popcorn 			2	3.99
+Laundry Detergent 			0	11.99
+Total: $19.97

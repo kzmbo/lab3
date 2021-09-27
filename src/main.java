@@ -3,13 +3,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class main {
+	public static HashMap<String, String> productsToAdd = new HashMap<String, String>();
+
 	public static void main(String[] args) throws FileNotFoundException {
-		File priceList = new File("products.txt");
+		//static ArrayList<String> productsToAdd;
+		File priceList = new File("./src/products.txt");
 		//File reference priceList is created.
 		// NOTE: depending on whether you're using replit or an IDE, be sure to verify that the directory is correct.
 
@@ -46,11 +50,12 @@ public class main {
 
 		
 		PrintWriter fileOut;
-		try {
-			fileOut = new PrintWriter(receiptName + ".txt");	
-		} catch(Exception e) {
-			fileOut = new PrintWriter("receipt.txt");
-		}
+//		try {
+//			fileOut = new PrintWriter(receiptName + ".txt");
+//		} catch(Exception e) {
+//
+//		}
+		fileOut = new PrintWriter("./src/receipt.txt");
 		
 		//PrintWriter reference fileOut is created.
 		// NOTE: depending on whether you're using replit or an IDE, be sure to verify that the directory is correct.
@@ -71,10 +76,10 @@ public class main {
 
 		// This loop will continue to run unless the user inputs q.
 		while(!(currentSKU.equalsIgnoreCase("q"))) {
-			priceList = new File("products.txt");
+			priceList = new File("./src/products.txt");
 			inputFile = new Scanner(priceList);
 			boolean foundMatchingSKU = false;
-			int amountDuplicateSKU = 1;
+			int amountDuplicateSKU = 0;
 
 			// This loop compares all SKU in the products.txt with what the user inputted.
 			// It will continue to run until the inputted SKU matches with the one in the product.txt
@@ -97,20 +102,23 @@ public class main {
 				}
 			}
 
+
 			// if we found the matching SKU, write it to the output file (receipt.txt)
 			// if not, nothing get written to the output file. it also prints out "try again"
 			if(foundMatchingSKU){
-				if(currentAmount.getAmount() > 1){
-					fileOut.println(currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "\t" + currentProduct.getPrice());
-				}else{
-					fileOut.println(currentProduct.getName() + "\t\t\t\t" + currentProduct.getPrice());
-				}
-			}else{
-				System.out.println("Try again!");
+				productsToAdd.put(currentProduct.getSKU(), currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "\t" + currentProduct.getPrice());
+			}else {
+				System.out.println("Try Again!");
 			}
+
 			System.out.println("Enter another SKU that you want to add to your cart [Enter Q to pay]: ");
 			currentSKU = check.getString();
 			inputFile.close();
+		}
+
+		for (String i : productsToAdd.values()){
+			System.out.println(i);
+			fileOut.println(i);
 		}
 
 		// Closes the program by writing the total of all the products in the cart.
