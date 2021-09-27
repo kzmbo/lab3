@@ -1,4 +1,4 @@
-# lab3 test v1.0.2?
+# lab3 test v1.0.2? idk how version numbers work
 
 > got the program to detect dupe items
 >> used a hash map to determine if the user add the same item.
