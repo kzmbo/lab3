@@ -8,25 +8,29 @@ public class Cart {
 	
 	
 	public Cart() {
-		
 		this.purchasedProducts = new ArrayList<Amount>(); //FIXME: Complete this line;
 		this.total = 0;//FIXME: complete this line;
 	}
 	
-	public void addProduct(Product p) {
-		boolean val = true;
-		for(int i=0; i<this.purchasedProducts.size(); i++) {
-			if(this.purchasedProducts.get(i).pro.getSKU().equals(p.getSKU())) {
-				val = false;
-				this.purchasedProducts.get(i).updateProAmount((this.purchasedProducts.get(i).proAmount)+1);
+	public int addProduct(Product p) {
+		boolean isNotDuplicate = true;
+		for(int i = 0; i < this.purchasedProducts.size(); i++) {
+			if(this.purchasedProducts.get(i).product.getSKU().equals(p.getSKU())) {
+				isNotDuplicate = false;
+				this.purchasedProducts.get(i).updateProductAmount((this.purchasedProducts.get(i).productAmount) + 1);
+				int x = (this.purchasedProducts.get(i).productAmount) + 1;
+				total += p.getPrice();
+				return x;
 			}
 		}
-		if(val) {
-			Amount am = new Amount(p, 0);
+		if(isNotDuplicate){
+			Amount am = new Amount(p, 1);
 			this.purchasedProducts.add(am);
+			total += p.getPrice();
+			return 1;
 		}
-		
-		total += p.getPrice();
+		return 0;
+		//total += p.getPrice();
 	}
 	
 	

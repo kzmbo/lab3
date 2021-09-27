@@ -43,95 +43,7 @@ public class main {
 
 		System.out.println("Hello~! Please enter the name you wish to name the receipt~!");
 		String receiptName = check.getString();
-		String receiptName2 = receiptName;
-		if(receiptName.contains(" ")) {
-			receiptName = receiptName.replace(" ", "");
-		}
-		if(receiptName.contains("/")) {
-			receiptName = receiptName.replace("/", "");
-		}
-		if(receiptName.contains("*")) {
-			receiptName = receiptName.replace("*", "");
-		}
-		if(receiptName.contains("\"")) {
-			receiptName = receiptName.replace("\"", "");
-		}
-		if(receiptName.contains("\\")) {
-			receiptName = receiptName.replace("\\", "");
-		}
-		if(receiptName.contains("[")) {
-			receiptName = receiptName.replace("[", "");
-		}
-		if(receiptName.contains("]")) {
-			receiptName = receiptName.replace("]", "");
-		}
-		if(receiptName.contains("{")) {
-			receiptName = receiptName.replace("{", "");
-		}
-		if(receiptName.contains("}")) {
-			receiptName = receiptName.replace("}", "");
-		}
-		if(receiptName.contains(":")) {
-			receiptName = receiptName.replace(":", "");
-		}
-		if(receiptName.contains(";")) {
-			receiptName = receiptName.replace(";", "");
-		}
-		if(receiptName.contains("|")) {
-			receiptName = receiptName.replace("|", "");
-		}
-		if(receiptName.contains(",")) {
-			receiptName = receiptName.replace(",", "");
-		}
-		if(receiptName.contains(".")) {
-			receiptName = receiptName.replace(".", "");
-		}
-		if(receiptName.contains("<")) {
-			receiptName = receiptName.replace("<", "");
-		}
-		if(receiptName.contains(">")) {
-			receiptName = receiptName.replace(">", "");
-		}
-		if(receiptName.contains("?")) {
-			receiptName = receiptName.replace("?", "");
-		}
-		if(receiptName.contains("!")) {
-			receiptName = receiptName.replace("!", "");
-		}
-		if(receiptName.contains("'")) {
-			receiptName = receiptName.replace("'", "");
-		}
-		if(receiptName.contains("#")) {
-			receiptName = receiptName.replace("#", "");
-		}
-		if(receiptName.contains("$")) {
-			receiptName = receiptName.replace("$", "");
-		}
-		if(receiptName.contains("%")) {
-			receiptName = receiptName.replace("%", "");
-		}
-		if(receiptName.contains("&")) {
-			receiptName = receiptName.replace("&", "");
-		}
-		if(receiptName.contains("(")) {
-			receiptName = receiptName.replace("(", "");
-		}
-		if(receiptName.contains(")")) {
-			receiptName = receiptName.replace(")", "");
-		}
-		if(receiptName.contains("^")) {
-			receiptName = receiptName.replace("^", "");
-		}
-		if(receiptName.contains("~")) {
-			receiptName = receiptName.replace("~", "");
-		}
-		if(receiptName.contains("=")) {
-			receiptName = receiptName.replace("=", "");
-		}
-		if(receiptName.contains("`")) {
-			receiptName = receiptName.replace("`", "");
-		}
-		//Prompts the user to enter a name for the receipt
+
 		
 		PrintWriter fileOut;
 		try {
@@ -143,8 +55,8 @@ public class main {
 		//PrintWriter reference fileOut is created.
 		// NOTE: depending on whether you're using replit or an IDE, be sure to verify that the directory is correct.
 
-		fileOut.println(receiptName2);
-		fileOut.println("Items\t\t\tSubtotal");
+		fileOut.println(receiptName);
+		fileOut.println("Items\t\t\t\tSubtotal");
 		//Writes name and makes two column for Items and Subtotal
 		//TODO: add a column for quantity.
 
@@ -153,6 +65,7 @@ public class main {
 		//Prompts the user to enter a SKU so that they can add it in their cart.
 
 		Product currentProduct = new Product("","","",0);
+		Amount currentAmount = new Amount(currentProduct, 0);
 		Cart cart = new Cart();
 		//create new objects for product and cart
 
@@ -161,6 +74,7 @@ public class main {
 			priceList = new File("products.txt");
 			inputFile = new Scanner(priceList);
 			boolean foundMatchingSKU = false;
+			int amountDuplicateSKU = 1;
 
 			// This loop compares all SKU in the products.txt with what the user inputted.
 			// It will continue to run until the inputted SKU matches with the one in the product.txt
@@ -172,7 +86,8 @@ public class main {
 						if (i == 1 && match.group(i).equals(currentSKU)) {
 							currentProduct = new Product(match.group(1), match.group(2), match.group(4), Double.parseDouble(match.group(5)));
 							//System.out.println(currentProduct.getSKU() + " " + currentProduct.getName() +  " " + currentProduct.getSize() + " " + currentProduct.getPrice()); FOR DEBUGGING PURPOSES
-							cart.addProduct(currentProduct);
+							amountDuplicateSKU = cart.addProduct(currentProduct);
+							currentAmount = new Amount(currentProduct, amountDuplicateSKU);
 							new Product("", "", "", 0);
 							foundMatchingSKU = true;
 							// if there's a matching sku, this boolean will be compared immediately in order for the program to run as intended
@@ -185,7 +100,11 @@ public class main {
 			// if we found the matching SKU, write it to the output file (receipt.txt)
 			// if not, nothing get written to the output file. it also prints out "try again"
 			if(foundMatchingSKU){
-				fileOut.println(currentProduct.getName() + "\t\t\t" + currentProduct.getPrice());
+				if(currentAmount.getAmount() > 1){
+					fileOut.println(currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "\t" + currentProduct.getPrice());
+				}else{
+					fileOut.println(currentProduct.getName() + "\t\t\t\t" + currentProduct.getPrice());
+				}
 			}else{
 				System.out.println("Try again!");
 			}

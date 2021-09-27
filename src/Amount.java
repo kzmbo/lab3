@@ -1,19 +1,25 @@
+import java.util.ArrayList;
 
 public class Amount {
-	public Product pro;
-	public int proAmount;
+	public Product product;
+	public int productAmount;
+
+	public Amount(Product product, int proAmount) {
+		this.productAmount = proAmount;
+		this.product = product;
+	}
 	
-	public void updateProAmount(int proAmount) {
-		this.proAmount = proAmount;
+	public void updateProductAmount(int proAmount) {
+		this.productAmount = proAmount;
 		//System.out.println("New amount!: " + this.proAmount);
 	}
 	
-	public void updatePro(Product pro) {
-		this.pro = pro;
+	public void updatePro(Product product) {
+		this.product = product;
 	}
-	
-	public Amount(Product pro, int proAmount) {
-		this.proAmount = proAmount;
-		this.pro = pro;
+
+	public int getAmount(){
+		return this.productAmount;
 	}
+
 }
