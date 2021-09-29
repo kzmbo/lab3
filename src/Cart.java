@@ -47,6 +47,7 @@ public class Cart {
 	* grand total, payment, and change.
 	* @return a String 
 	*/
+	
 	public String toString() {
 		System.out.println(purchasedProducts);
 		return "";
