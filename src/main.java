@@ -64,7 +64,7 @@ public class main {
 		fileOut.println("Manhattan, New York City NY 10123");
 		fileOut.println();
 		fileOut.println();
-		fileOut.println("Items\t\t\t\tSubtotal");
+		fileOut.println(String.format("%-30s %-10s %-30s","Items","","Subtotal"));
 		//Writes name and makes two column for Items and Subtotal
 		//TODO: add a column for quantity.
 
