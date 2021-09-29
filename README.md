@@ -19,4 +19,6 @@ Fix the format of the receipt.txt
 
 Be sure to add javadoc to cart.java, amount.java, and product.java
 
+add the address.
+
 if we have time, clean up the code?
