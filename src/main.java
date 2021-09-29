@@ -139,6 +139,7 @@ public class main {
 		System.out.println("3. No!! WAiT!!");
 		System.out.println("4. Use infinity gauntlet.");
 		choice = CheckInput.getIntRange(1, 4);
+		
 		if(choice == 4) {
 			System.out.println("*snap*");
 			System.out.println("The clerk has vanished. You monster... Your change is: $" + owed);
