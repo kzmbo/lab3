@@ -122,5 +122,30 @@ public class main {
 		double total = Math.round( (cart.getTransactionTotal()) * 100.0 ) / 100.0;
 		fileOut.println("Total: $" + total);
 		fileOut.close();
+		System.out.println("You're total is: " + total);
+		double owed = total;
+		double userPayment;
+		while(owed > 0) {
+			System.out.println("Please enter the amount you would like to pay: ");
+			userPayment = CheckInput.getDouble();
+			owed = Math.round((owed - userPayment)* 100.0)/100.0;
+			System.out.println("Your new total is: $" + owed);
+		}
+		owed *= -1;
+		int choice;
+		System.out.println("Thanks for the tip of: $" + owed + ". We really appreciate it!");
+		System.out.println("1. Huh!?");
+		System.out.println("2. Wait..WHAT!?");
+		System.out.println("3. No!! WAiT!!");
+		System.out.println("4. Use infinity gauntlet.");
+		choice = CheckInput.getIntRange(1, 4);
+		if(choice == 4) {
+			System.out.println("*snap*");
+			System.out.println("The clerk has vanished. You monster... Your change is: $" + owed);
+		}
+		else {
+			System.out.println("Sorry, no refunds...");
+		}
+		
 	}
 }
