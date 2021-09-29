@@ -109,7 +109,7 @@ public class main {
 			// if not, nothing get written to the output file. it also prints out "try again"
 			if(foundMatchingSKU){
 				double subtotal = Math.round( (currentProduct.getPrice() * currentAmount.getAmount()) * 100.0 ) / 100.0;
-				productsToAdd.put(currentProduct.getSKU(), currentProduct.getName() + "\t\t\t" + currentAmount.getAmount() + "(@" + currentProduct.getPrice() + ")" + "\t$" +  subtotal);
+				productsToAdd.put(currentProduct.getSKU(), String.format("%-30s %-10s %-10s",currentProduct.getName(),currentAmount.getAmount() + "(@" + currentProduct.getPrice() + ")", "$" +  subtotal));
 			}else {
 				System.out.println("Try Again!");
 			}
